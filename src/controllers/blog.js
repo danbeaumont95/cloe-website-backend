@@ -55,6 +55,12 @@ const createBlogHandler = async (req, res) => {
       if (error) {
         throw new Error(error);
       }
+
+      if (!files.file) {
+        respBody.success = true;
+        respBody.data = newBlog;
+        return res.status(200).json(respBody);
+      }
       const { path } = files.file[0];
 
       const buffer = fs.readFileSync(path);
