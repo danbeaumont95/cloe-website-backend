@@ -10,5 +10,5 @@ const getAllBlogs = async () => {
 };
 
 module.exports = {
-  getAllBlogs
+  getAllBlogs,
 };

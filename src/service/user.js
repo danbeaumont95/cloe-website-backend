@@ -1,8 +1,7 @@
+const { omit } = require('lodash');
 const { Session } = require('../model/Session');
 const { User } = require('../model/User');
 const { checkIfUserExists } = require('../helpers/user');
-const { omit } = require('lodash');
-
 
 const validatePassword = async ({
   email,
@@ -43,5 +42,5 @@ const createUser = async (body) => {
 module.exports = {
   validatePassword,
   createUserSession,
-  createUser
+  createUser,
 };
