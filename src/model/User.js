@@ -9,9 +9,10 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
   },
   {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 );
+// eslint-disable-next-line func-names
 userSchema.pre('save', async function (next) {
   const user = this;
   if (!user.isModified('password')) {
@@ -26,13 +27,15 @@ userSchema.pre('save', async function (next) {
   return next();
 });
 
+// eslint-disable-next-line func-names
 userSchema.methods.comparePassword = async function (candidatePassword) {
   const user = this;
+  // eslint-disable-next-line no-unused-vars
   return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
 };
 
 const User = mongoose.model('User', userSchema);
 
 module.exports = {
-  User
+  User,
 };

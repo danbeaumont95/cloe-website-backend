@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const blogSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    image: { type: String },
+    image: { type: String, default: '' },
     body: { type: String, required: true },
-    numComments: { type: Number },
+    numComments: { type: Number, default: 0 },
+    tags: { type: Array, default: [] },
   },
   { timestamps: true },
 );
