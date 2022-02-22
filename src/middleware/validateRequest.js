@@ -1,5 +1,3 @@
-// import log from '../logger';
-
 exports.validateRequest = (schema) => async (req, res, next) => {
   try {
     await schema.validate({

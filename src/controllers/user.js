@@ -1,15 +1,13 @@
-const { createUser } = require('../service/user');
 const { omit } = require('lodash');
+const { createUser } = require('../service/user');
 
 const createUserHandler = async (req, res) => {
   const respBody = {
     success: false,
     message: '',
-    data: {}
+    data: {},
   };
   try {
-    console.log(process.env.createUserApiKey, 'process.env.createUserApiKey');
-    console.log(req.headers.apikey, 'req');
     if (!req.headers.apikey || req.headers.apikey !== process.env.createUserApiKey) {
       respBody.message = '[BadRequest] Unauthorized to create new user';
       return res.status(200).json(respBody);
@@ -31,7 +29,6 @@ const createUserHandler = async (req, res) => {
 
     respBody.success = true;
     respBody.data = omit(user.toJSON(), 'password');
-
   } catch (error) {
     return res.send({ error: error.message });
   }
@@ -39,5 +36,5 @@ const createUserHandler = async (req, res) => {
 };
 
 module.exports = {
-  createUserHandler
+  createUserHandler,
 };

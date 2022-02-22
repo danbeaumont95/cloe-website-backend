@@ -1,13 +1,10 @@
 const jwt = require('jsonwebtoken');
-// import config from 'config';
 
-const privateKey = process.env.privateKey;
+const { privateKey } = process.env;
 
-const publicKey = process.env.publicKey;
+const { publicKey } = process.env;
 
-const signJwt = (object, options) => {
-  return jwt.sign(object, privateKey, options);
-};
+const signJwt = (object, options) => jwt.sign(object, privateKey, options);
 
 const decode = (token) => {
   try {
@@ -44,5 +41,5 @@ const verifyJwt = (token) => {
 module.exports = {
   signJwt,
   decode,
-  verifyJwt
+  verifyJwt,
 };
