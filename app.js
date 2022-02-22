@@ -9,6 +9,7 @@ const { dbUri } = process.env;
 const blogRoutes = require('./src/routes/blog');
 const sessionRoutes = require('./src/routes/session');
 const userRoutes = require('./src/routes/user');
+const papersRoutes = require('./src/routes/papers');
 
 mongoose.connect(dbUri, { useNewUrlParser: true })
   .then(() => {
@@ -17,12 +18,12 @@ mongoose.connect(dbUri, { useNewUrlParser: true })
     app.options('*', cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
-    // app.use(deserializeUser)
 
     app.use('/api', router);
     app.get('/info', async (req, res) => {
       res.send({ name: 'Cloe website API', version: '0.0.1 BETA' });
     });
+    // eslint-disable-next-line no-unused-vars
     const server = app.listen(port, () => {
       // eslint-disable-next-line no-console
       console.log(`Server has started on ${port}!`);
@@ -30,4 +31,5 @@ mongoose.connect(dbUri, { useNewUrlParser: true })
     router.use('/blog', blogRoutes);
     router.use('/session', sessionRoutes);
     router.use('/user', userRoutes);
+    router.use('/papers', papersRoutes);
   });
