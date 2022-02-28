@@ -1,5 +1,4 @@
-const { User } = require("../model/User");
-
+const { User } = require('../model/User');
 
 const checkIfUserExists = async (email) => {
   const userFound = await User.findOne({ email });
@@ -7,5 +6,5 @@ const checkIfUserExists = async (email) => {
 };
 
 module.exports = {
-  checkIfUserExists
+  checkIfUserExists,
 };
