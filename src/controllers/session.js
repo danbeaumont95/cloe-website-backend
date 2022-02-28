@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const { validatePassword, createUserSession } = require('../service/user');
 const { signJwt } = require('../utils/jwt.utils');
 

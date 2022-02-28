@@ -1,4 +1,6 @@
-const { object, string, ref, array, date, boolean } = require('yup');
+const {
+  object, string, ref,
+} = require('yup');
 
 const createUserSchema = object({
   body: object({
@@ -14,7 +16,7 @@ const createUserSchema = object({
       [ref('password'), null],
       'Passwords must match',
     ),
-  })
+  }),
 });
 
 const createUserSessionSchema = object({
@@ -31,5 +33,5 @@ const createUserSessionSchema = object({
 
 module.exports = {
   createUserSchema,
-  createUserSessionSchema
+  createUserSessionSchema,
 };
