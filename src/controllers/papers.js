@@ -1,8 +1,8 @@
 const aws = require('aws-sdk');
 const multiparty = require('multiparty');
 const fs = require('fs');
-const { uniqueId } = require('lodash');
-const { upload, generateSuffix } = require('../helpers/aws');
+const moment = require('moment');
+const { upload } = require('../helpers/aws');
 const { Papers } = require('../model/Papers');
 const { getAllPapers } = require('../service/papers');
 
@@ -53,13 +53,18 @@ const postPapersHandler = async (req, res) => {
   try {
     const form = new multiparty.Form();
     form.parse(req, async (error, fields, files) => {
-      const { title, body } = fields;
+      const { title, body, dateCreated } = fields;
       const newPaperTitle = title[0];
       const newPaperBody = body[0];
+      const dateWrote = dateCreated[0];
+      const formattedDate = moment(dateWrote).format('YYYY-MM-DD[T]HH:mm:ss');
+
       if (!title) {
         throw new Error('[BadRequest] Paper needs a title');
       }
-      const newPaper = await Papers.create({ title: newPaperTitle, body: newPaperBody });
+      const newPaper = await Papers.create({
+        title: newPaperTitle, body: newPaperBody, dateWrote: formattedDate,
+      });
       const { _id } = newPaper;
       if (error) {
         throw new Error(error);
@@ -74,9 +79,7 @@ const postPapersHandler = async (req, res) => {
 
       const buffer = fs.readFileSync(path);
 
-      const uuid = uniqueId();
-      const suffix = generateSuffix(files.file[0].headers['content-type']);
-      const fileName = `papers/${newPaperTitle}/${_id}/${uuid}_${suffix}`;
+      const fileName = `papers/${newPaperTitle}/${_id}/${newPaperTitle}`;
 
       const data = await upload(buffer, fileName);
 

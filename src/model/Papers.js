@@ -7,6 +7,7 @@ const papersSchema = new mongoose.Schema(
     body: { type: String, required: true },
     tags: { type: Array, default: [] },
     link: { type: String, default: '' },
+    dateWrote: { type: Date, default: null },
   },
   { timestamps: true },
 );

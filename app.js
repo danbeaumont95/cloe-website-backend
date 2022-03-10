@@ -10,6 +10,7 @@ const blogRoutes = require('./src/routes/blog');
 const sessionRoutes = require('./src/routes/session');
 const userRoutes = require('./src/routes/user');
 const papersRoutes = require('./src/routes/papers');
+const contactRoutes = require('./src/routes/contact');
 
 mongoose.connect(dbUri, { useNewUrlParser: true })
   .then(() => {
@@ -32,4 +33,5 @@ mongoose.connect(dbUri, { useNewUrlParser: true })
     router.use('/session', sessionRoutes);
     router.use('/user', userRoutes);
     router.use('/papers', papersRoutes);
+    router.use('/contact', contactRoutes);
   });
