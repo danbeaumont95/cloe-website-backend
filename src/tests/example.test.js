@@ -11,7 +11,7 @@ describe('papers', () => {
   let db;
 
   beforeAll(async () => {
-    connection = await MongoClient.connect('mongodb+srv://danbeaumont95:bigbonsai95@cluster0.eknio.mongodb.net/cloe-website?retryWrites=true&w=majority', {
+    connection = await MongoClient.connect(`${process.env.dbUri}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
